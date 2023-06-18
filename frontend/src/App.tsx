@@ -10,6 +10,8 @@ import * as ROUTES from './routes'
 import { useTranslation } from 'react-i18next'
 import Environment from 'components/Environment'
 import { HEARTBEAT } from './api'
+import RecipeApp from './RecipeApp'
+import ExampleFramer from 'components/ExampleFramer'
 
 const BackendConnectionTest = () => {
   const [response, setResponse] = useState(undefined as any)
@@ -70,9 +72,11 @@ const App: React.FC = () => {
             <Redirect from={'*'} to={ROUTES.ROOT} />
             <Route path={ROUTES.ROOT}>
               <>
-                <Environment />
+                {/* <Environment />
                 <hr className="dotted" />
-                <BackendConnectionTest />
+                <BackendConnectionTest /> */}
+                {/* <RecipeApp /> */}
+                <ExampleFramer></ExampleFramer>
               </>
             </Route>
           </>
