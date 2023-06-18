@@ -56,6 +56,8 @@ const webpackConfig = (env): Configuration => ({
           'css-loader',
           // Compiles Sass to CSS
           'sass-loader',
+          // post css
+          'postcss-loader',
         ],
       },
       {
@@ -65,6 +67,8 @@ const webpackConfig = (env): Configuration => ({
           'style-loader',
           // Translates CSS into CommonJS
           'css-loader',
+          // post css
+          'postcss-loader',
         ],
       },
       {

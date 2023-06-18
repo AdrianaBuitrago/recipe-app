@@ -23,6 +23,8 @@ COPY public ./public
 COPY .eslintrc.js ./
 COPY tsconfig.json ./
 COPY webpack.config.ts ./
+COPY tailwind.config.js ./
+COPY postcss.config.js ./
 RUN npm run build
 
 # Nginx proxy to serve backend ('/api') and frontend ('/') from same port

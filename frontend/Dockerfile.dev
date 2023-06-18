@@ -23,6 +23,8 @@ COPY public ./public
 COPY .eslintrc.js ./
 COPY tsconfig.json ./
 COPY webpack.config.ts ./
+COPY tailwind.config.js ./
+COPY postcss.config.js ./
 
 # This is responsible of copying node_modules and package-lock.json to host machine
 COPY docker-entrypoint.sh /docker-entrypoint.sh
