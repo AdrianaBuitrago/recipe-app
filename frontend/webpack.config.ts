@@ -90,6 +90,7 @@ const webpackConfig = (env): Configuration => ({
     },
     hot: true,
     open: true,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

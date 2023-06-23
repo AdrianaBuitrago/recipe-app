@@ -28,7 +28,7 @@ function RecipePreview({ id, title, category, theme }) {
           </motion.div>
         </motion.div>
       </div>
-      <Link to={id} className={`card-open-link`} />
+      <Link to={`/recipes/${id}`} className={`card-open-link`} />
     </li>
   )
 }
