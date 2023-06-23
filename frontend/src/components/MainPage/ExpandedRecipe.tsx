@@ -1,12 +1,11 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { items } from './data'
 
+export function ExpandedRecipe({ id }) {
+  const { category, title } = items.find(item => item.id === id)
 
-const RecipeDetail = ({
-  id = '1',
-  title = 'Sushi',
-  category = 'Japonés'
-}) => {
   return (
     <>
       <motion.div
@@ -17,15 +16,19 @@ const RecipeDetail = ({
         style={{ pointerEvents: 'auto' }}
         className="overlay"
       >
-        {/* <Link to="/" /> */}
+        <Link to="/" />
       </motion.div>
       <div className="card-content-container open">
-        <motion.div className="card-content" layoutId={`${id}`}>
+        <motion.div className="card-content" layoutId={`card-container-${id}`}>
           <motion.div
             className="card-image-container"
             layoutId={`card-image-container-${id}`}
           >
-            <img className="card-image" src={'https://imag.bonviveur.com/sushi-casero_800.webp'} alt="" />
+            <img
+              className="card-image"
+              src='https://imag.bonviveur.com/sushi-casero_800.webp'
+              alt=""
+            />
           </motion.div>
           <motion.div
             className="title-container"
@@ -35,12 +38,10 @@ const RecipeDetail = ({
             <h2>{title}</h2>
           </motion.div>
           <motion.div className="content-container" animate>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore commodi in sunt nemo. Rem reiciendis ratione ipsa eveniet nostrum sint distinctio inventore, omnis, nobis ad quis alias aspernatur obcaecati in.</p>
+            <p>Prueba de texto. ItemExampleFramer. Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis ad quaerat voluptates ullam aspernatur sapiente ducimus eos, rerum neque culpa amet distinctio reprehenderit totam soluta, ipsa numquam, dolor recusandae libero.</p>
           </motion.div>
         </motion.div>
       </div>
     </>
   )
 }
-
-export default RecipeDetail

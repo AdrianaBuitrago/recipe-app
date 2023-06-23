@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './style.scss'
 import {
   BrowserRouter as Router,
@@ -7,57 +7,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 import * as ROUTES from './routes'
-import { useTranslation } from 'react-i18next'
-import Environment from 'components/Environment'
-import { HEARTBEAT } from './api'
-import RecipeApp from './RecipeApp'
-import ExampleFramer from 'components/ExampleFramer'
-
-const BackendConnectionTest = () => {
-  const [response, setResponse] = useState(undefined as any)
-  const [isFetching, setIsFetching] = useState(false)
-
-  useEffect(() => {
-    setIsFetching(true)
-    fetch(HEARTBEAT).then(
-      (response) => response.json()
-    )
-      .then(
-        (response) => setResponse(response),
-        (response) => setResponse(response),
-      ).finally(() =>
-        setIsFetching(false)
-      )
-  }, [])
-
-  return (
-    <>
-      <h3>
-        Backend connection test:
-      </h3>
-      <p>
-        {isFetching ?
-          <p>
-            Trying to reach backend...
-          </p>
-          :
-          <>
-            <p>
-              Backend responded with following message:
-            </p>
-            <b>
-              <pre>
-                <code>
-                  {JSON.stringify(response, null, 2)}
-                </code>
-              </pre>
-            </b>
-          </>
-        }
-      </p>
-    </>
-  )
-}
+import MainPage from 'components/MainPage'
 
 
 const App: React.FC = () => {
@@ -72,11 +22,7 @@ const App: React.FC = () => {
             <Redirect from={'*'} to={ROUTES.ROOT} />
             <Route path={ROUTES.ROOT}>
               <>
-                {/* <Environment />
-                <hr className="dotted" />
-                <BackendConnectionTest /> */}
-                {/* <RecipeApp /> */}
-                <ExampleFramer></ExampleFramer>
+                <MainPage></MainPage>
               </>
             </Route>
           </>
