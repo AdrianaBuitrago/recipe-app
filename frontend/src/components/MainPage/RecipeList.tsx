@@ -3,7 +3,7 @@ import { items } from './data'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
-function Card({ id, title, category, theme }) {
+function RecipePreview({ id, title, category, theme }) {
   return (
     <li className={`card ${theme}`}>
       <div className="card-content-container">
@@ -30,15 +30,15 @@ function Card({ id, title, category, theme }) {
       </div>
       <Link to={id} className={`card-open-link`} />
     </li>
-  );
+  )
 }
 
-export function List({ selectedId }) {
+export function RecipeList({ selectedId }) {
   return (
     <ul className="card-list">
       {items.map(card => (
-        <Card key={card.id} {...card} isSelected={card.id === selectedId} />
+        <RecipePreview key={card.id} {...card} isSelected={card.id === selectedId} />
       ))}
     </ul>
-  );
+  )
 }
