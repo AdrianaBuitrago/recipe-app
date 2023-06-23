@@ -3,7 +3,7 @@ import { AnimateSharedLayout, AnimatePresence } from 'framer-motion'
 import { Header } from './Header'
 import { ExpandedRecipe } from './ExpandedRecipe'
 import { RecipeList } from './RecipeList'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import './styles.scss'
 import { Footer } from './Footer'
 
@@ -33,7 +33,8 @@ export default function MainPage() {
           <Switch>
             <>
               <Route path={'/ingredient-list'} exact component={IngredientList} />
-              <Route path={'/'} exact component={RecipeListWithAnimation} />
+              <Route path={['/recipes', '/recipes/:id']} exact component={RecipeListWithAnimation} />
+              <Redirect from={'*'} to={'/recipes'} />
             </>
           </Switch>
         </AnimateSharedLayout>

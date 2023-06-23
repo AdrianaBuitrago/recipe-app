@@ -13,7 +13,7 @@ export const Footer = () => {
   const disabledColor = 'var(--back-color)'
 
   const onclickMainPageButton = () => {
-    history.push('/')
+    history.push('/recipes')
   }
 
   const onclickIngredientListButton = () => {
