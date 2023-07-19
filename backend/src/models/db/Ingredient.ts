@@ -7,6 +7,7 @@ export class Ingredient extends BaseModel {
 
   id!: number
   name!: string
+  is_checked!: boolean
 
   // relations attributes
   recipes?: Recipe[]
@@ -22,6 +23,7 @@ export class Ingredient extends BaseModel {
     properties: {
       id: { type: 'integer' },
       name: { type: 'string' },
+      is_checked: { type: 'boolean' },
     },
   }
 
@@ -48,7 +50,9 @@ export class Ingredient extends BaseModel {
   }
 
   $beforeUpsert() {
-    this.name = this.name.toLowerCase()
+    if (this.name) {
+      this.name = this.name.toLowerCase()
+    }
   }
 
   $beforeInsert() {
