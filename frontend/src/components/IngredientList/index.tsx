@@ -8,22 +8,36 @@ import './style.scss'
 function IngredientList() {
 
   const [ingredients, setIngredients] = useState([])
-  const [checkedIngredients, setCheckedIngredients] = useState([])
   const [searchIngredients, setSearchIngredients] = useState('')
 
   useEffect(() => {
-    fetch(INGREDIENTS)
-      .then((response) => response.json())
-      .then((json) => {
-        setIngredients(json)
-      })
+    fetchIngredients()
   }, [])
 
-  const handleCheckboxChange = (ingredientName, isChecked) => {
-    if (isChecked) {
-      setCheckedIngredients([...checkedIngredients, ingredientName])
-    } else {
-      setCheckedIngredients(checkedIngredients.filter(name => name !== ingredientName))
+  const fetchIngredients = async () => {
+    try {
+      const response = await fetch(INGREDIENTS)
+      const json = await response.json()
+      setIngredients(json)
+    } catch (error) {
+      console.error('Error al obtener los ingredientes:', error)
+    }
+  }
+
+  const handleCheckboxChange = async (ingredientId, isChecked) => {
+    try {
+      await fetch(`${INGREDIENTS}/${ingredientId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          'is_checked': isChecked
+        }),
+      })
+      fetchIngredients()
+    } catch (error) {
+      console.error('Error al actualizar el ingrediente:', error)
     }
   }
 
@@ -41,19 +55,13 @@ function IngredientList() {
         <section>
           <h1>Despensa</h1>
           <ul>
-            {filteredIngredients.filter(ingredient => {
-              if (checkedIngredients.includes(ingredient.name)) {
-                return true
-              } else {
-                return false
-              }
-            })
+            {filteredIngredients.filter(ingredient => { return ingredient.is_checked })
               .map((ingredient) => (
                 <Checkbox
                   key={ingredient.id}
                   label={ingredient.name}
                   checked
-                  onChange={(e) => handleCheckboxChange(ingredient.name, e.target.checked)}
+                  onChange={(e) => handleCheckboxChange(ingredient.id, e.target.checked)}
                 />
               ))}
           </ul>
@@ -61,19 +69,13 @@ function IngredientList() {
         <section>
           <h1>Comprar</h1>
           <ul>
-            {filteredIngredients.filter(ingredient => {
-              if (checkedIngredients.includes(ingredient.name)) {
-                return false
-              } else {
-                return true
-              }
-            })
+            {filteredIngredients.filter(ingredient => { return !ingredient.is_checked })
               .map((ingredient) => (
                 <Checkbox
                   key={ingredient.id}
                   label={ingredient.name}
                   checked={false}
-                  onChange={(e) => handleCheckboxChange(ingredient.name, e.target.checked)}
+                  onChange={(e) => handleCheckboxChange(ingredient.id, e.target.checked)}
                 />
               ))}
           </ul>
