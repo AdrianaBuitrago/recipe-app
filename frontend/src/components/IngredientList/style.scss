@@ -1,0 +1,22 @@
+.ingredient-list {
+  display: flex;
+  justify-content: space-around;
+
+  section {
+
+    h1 {
+      color: var(--brand-color);
+    }
+  }
+}
+
+.search-container {
+  
+display: flex;
+justify-content: center;
+padding: 40px;
+  .search-input{
+    width: 560px;
+  }
+
+}
