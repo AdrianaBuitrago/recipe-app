@@ -1,10 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import { items } from './data'
+import { Metric } from '@tremor/react'
 
-export function ExpandedRecipe({ id }) {
-  const { category, title } = items.find(item => item.id === id)
+import { Link } from 'react-router-dom'
+import { RECIPES } from 'src/api'
+
+export function ExpandedRecipe({ selectedId }) {
+
+  const [recipes, setRecipes] = useState([])
+
+  useEffect(() => {
+    fetchRecipes()
+  }, [])
+
+  const fetchRecipes = async () => {
+    try {
+      const response = await fetch(RECIPES)
+      const json = await response.json()
+      setRecipes(json)
+    } catch (error) {
+      console.error('Error al obtener las recetas:', error)
+    }
+  }
+
+  const recipe = recipes.find(recipe => {
+    return recipe.id === Number(selectedId)
+  })
+
+  if (!recipe) {
+    return null
+  }
+
+  const { name, description, id } = recipe
 
   return (
     <>
@@ -34,11 +61,11 @@ export function ExpandedRecipe({ id }) {
             className="title-container"
             layoutId={`title-container-${id}`}
           >
-            <span className="category">{category}</span>
-            <h2>{title}</h2>
+            {/* <span className="category">{description}</span> */}
+            <Metric>{name}</Metric>
           </motion.div>
           <motion.div className="content-container" animate>
-            <p>Prueba de texto. ItemExampleFramer. Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis ad quaerat voluptates ullam aspernatur sapiente ducimus eos, rerum neque culpa amet distinctio reprehenderit totam soluta, ipsa numquam, dolor recusandae libero.</p>
+            <p>{description}</p>
           </motion.div>
         </motion.div>
       </div>
