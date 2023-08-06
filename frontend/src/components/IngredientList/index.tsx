@@ -46,7 +46,7 @@ function IngredientList() {
   }
 
   const filteredIngredients = ingredients.filter(ingredient =>
-    ingredient.name.toLowerCase().startsWith(searchIngredients.toLowerCase())
+    ingredient.name.toLowerCase().includes(searchIngredients.toLowerCase())
   )
 
   return (
