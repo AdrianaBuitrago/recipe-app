@@ -23,7 +23,7 @@ export class Ingredient extends BaseModel {
     properties: {
       id: { type: 'integer' },
       name: { type: 'string' },
-      is_checked: { type: 'boolean' },
+      is_checked: { type: ['boolean', 'null'] },
     },
   }
 
