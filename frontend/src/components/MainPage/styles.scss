@@ -257,3 +257,10 @@ p {
   display: flex;
   justify-content: center;
 }
+
+.text-tremor-metric {
+  color: #fff;
+  &::first-letter {
+    text-transform:capitalize;
+  }
+}

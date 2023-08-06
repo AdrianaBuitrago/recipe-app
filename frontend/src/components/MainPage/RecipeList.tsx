@@ -1,11 +1,13 @@
-import React from 'react'
-import { items } from './data'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { Metric } from '@tremor/react'
+import { RECIPES } from 'src/api'
 
-function RecipePreview({ id, title, category, theme }) {
+function RecipePreview({ id, name, description }) {
+
   return (
-    <li className={`card ${theme}`}>
+    <li className={`card ${name}`}>
       <div className="card-content-container">
         <motion.div className="card-content" layoutId={`card-container-${id}`}>
           <motion.div
@@ -23,8 +25,8 @@ function RecipePreview({ id, title, category, theme }) {
             className="title-container"
             layoutId={`title-container-${id}`}
           >
-            <span className="category">{category}</span>
-            <h2>{title}</h2>
+            {/* <span className="category">{description}</span> */}
+            <Metric>{name}</Metric>
           </motion.div>
         </motion.div>
       </div>
@@ -34,10 +36,30 @@ function RecipePreview({ id, title, category, theme }) {
 }
 
 export function RecipeList({ selectedId }) {
+
+  const [recipes, setRecipes] = useState([])
+
+  useEffect(() => {
+    fetchRecipes()
+  }, [])
+
+  const fetchRecipes = async () => {
+    try {
+      const response = await fetch(RECIPES)
+      const json = await response.json()
+      setRecipes(json)
+    } catch (error) {
+      console.error('Error al obtener las recetas:', error)
+    }
+  }
   return (
     <ul className="card-list">
-      {items.map(card => (
-        <RecipePreview key={card.id} {...card} isSelected={card.id === selectedId} />
+      {recipes.map(recipe => (
+        <RecipePreview
+          key={recipe.id}
+          name={recipe.name}
+          {...recipe}
+          isSelected={recipe.id === selectedId} />
       ))}
     </ul>
   )

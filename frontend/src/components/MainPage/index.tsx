@@ -16,7 +16,7 @@ function RecipeListWithAnimation({ match }) {
     <>
       <RecipeList selectedId={id} />
       <AnimatePresence>
-        {id && imageHasLoaded && <ExpandedRecipe id={id} key="item" />}
+        {id && imageHasLoaded && <ExpandedRecipe selectedId={id}/>}
       </AnimatePresence>
     </>
   )
@@ -29,11 +29,9 @@ export default function MainPage() {
         <AnimateSharedLayout>
           <Header />
           <Switch>
-            <>
-              <Route path={'/ingredient-list'} exact component={IngredientList} />
-              <Route path={['/recipes', '/recipes/:id']} exact component={RecipeListWithAnimation} />
-              <Redirect from={'*'} to={'/ingredient-list'} />
-            </>
+            <Route path={'/ingredient-list'} exact component={IngredientList} />
+            <Route path={['/recipes', '/recipes/:id']} exact component={RecipeListWithAnimation} />
+            <Redirect from={'*'} to={'/ingredient-list'} />
           </Switch>
         </AnimateSharedLayout>
       </div>
