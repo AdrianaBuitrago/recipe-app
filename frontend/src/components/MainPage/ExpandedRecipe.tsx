@@ -1,27 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import { Metric } from '@tremor/react'
 
 import { Link } from 'react-router-dom'
-import { RECIPES } from 'src/api'
+import { useRecipes } from 'src/hooks/api'
 
 export function ExpandedRecipe({ selectedId }) {
-
-  const [recipes, setRecipes] = useState([])
-
-  useEffect(() => {
-    fetchRecipes()
-  }, [])
-
-  const fetchRecipes = async () => {
-    try {
-      const response = await fetch(RECIPES)
-      const json = await response.json()
-      setRecipes(json)
-    } catch (error) {
-      console.error('Error al obtener las recetas:', error)
-    }
-  }
+  const { recipes } = useRecipes()
 
   const recipe = recipes.find(recipe => {
     return recipe.id === Number(selectedId)

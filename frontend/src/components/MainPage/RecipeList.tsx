@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Metric } from '@tremor/react'
-import { RECIPES } from 'src/api'
+import { useRecipes } from 'src/hooks/api'
 
 function RecipePreview({ id, name, description }) {
 
@@ -36,22 +36,8 @@ function RecipePreview({ id, name, description }) {
 }
 
 export function RecipeList({ selectedId }) {
+  const { recipes } = useRecipes()
 
-  const [recipes, setRecipes] = useState([])
-
-  useEffect(() => {
-    fetchRecipes()
-  }, [])
-
-  const fetchRecipes = async () => {
-    try {
-      const response = await fetch(RECIPES)
-      const json = await response.json()
-      setRecipes(json)
-    } catch (error) {
-      console.error('Error al obtener las recetas:', error)
-    }
-  }
   return (
     <ul className="card-list">
       {recipes.map(recipe => (
