@@ -10,7 +10,7 @@ datasource db {
 model ingredient {
   id                Int                 @unique @default(autoincrement())
   name              String              @unique @db.VarChar(255)
-  is_checked        Boolean             @default(false)
+  is_checked        Boolean?
   recipe_ingredient recipe_ingredient[]
 }
 
