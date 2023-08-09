@@ -1,9 +1,13 @@
+.container-ingredient-list {
+  max-width: 400px;
+  margin: auto;
+}
+
 .ingredient-list {
   display: flex;
   justify-content: space-around;
 
   section {
-
     h1 {
       color: var(--brand-color);
     }
@@ -11,12 +15,29 @@
 }
 
 .search-container {
-  
-display: flex;
-justify-content: center;
-padding: 40px;
-  .search-input{
+
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+
+  .search-input {
     width: 560px;
   }
 
+}
+
+.ingredients-crossed-out {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    color: grey;
+    text-decoration: line-through;
+  }
+
+  label {
+    color: grey;
+  }
 }
