@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import './style.scss'
+import React from 'react'
+import './styles.scss'
 import {
   BrowserRouter as Router,
   Switch,

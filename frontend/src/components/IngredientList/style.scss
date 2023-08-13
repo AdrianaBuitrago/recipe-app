@@ -9,7 +9,7 @@
 
   section {
     h1 {
-      color: var(--brand-color);
+      color: var(--black-color);
     }
   }
 }
@@ -22,6 +22,7 @@
 
   .search-input {
     width: 560px;
+    
   }
 
 }
@@ -31,6 +32,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  h1{
+    color: var(--black-color);
+  }
 
   ul {
     color: grey;

@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark} from '@fortawesome/free-solid-svg-icons'
 
-import './style.scss'
+import './styles.scss'
 
 function Checkbox({
   label,
@@ -14,9 +14,11 @@ function Checkbox({
   return (
     <div className="checkbox">
       <input
+        className='checkbox'
         type="checkbox"
         checked={checked}
         onChange={onChange}
+        color='var(--brand-color)'
       />
       <label>
         {label}
@@ -24,8 +26,8 @@ function Checkbox({
       {showDeleteButton ?
         <FontAwesomeIcon
           icon={faXmark}
-          size='xl'
-          style={{color: 'var(--back-color)'}}
+          size='sm'
+          style={{color: 'var(--black-color)'}}
           onClick={onClickDeleteButton}
         />
         :

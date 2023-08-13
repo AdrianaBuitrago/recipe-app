@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Metric } from '@tremor/react'
 import { useRecipes } from 'src/hooks/api'
 
-function RecipePreview({ id, name, description }) {
+function RecipePreview({ id, name }) {
 
   return (
     <li className={`card ${name}`}>
