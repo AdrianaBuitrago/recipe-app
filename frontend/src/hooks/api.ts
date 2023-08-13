@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { RECIPES } from 'src/api'
+import { INGREDIENTS, RECIPES } from 'src/api'
 
 export const useRecipes = () => {
   const [recipes, setRecipes] = useState([])
@@ -22,3 +22,27 @@ export const useRecipes = () => {
     recipes
   }
 }
+
+export const useIngredients = () => {
+  const [ingredients, setIngredients] = useState([])
+
+  useEffect(() => {
+    fetchIngredients()
+  }, [])
+
+  const fetchIngredients = async () => {
+    try {
+      const response = await fetch(INGREDIENTS)
+      const json = await response.json()
+      setIngredients(json)
+    } catch (error) {
+      console.error('Error al obtener los ingredientes', error)
+    }
+  }
+
+  return {
+    ingredients,
+    fetchIngredients
+  }
+}
+

@@ -1,5 +1,6 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useIngredients } from 'src/hooks/api'
 import { INGREDIENTS } from 'src/api'
 import { TextInput } from '@tremor/react'
 import Checkbox from 'components/Checkbox'
@@ -7,22 +8,8 @@ import './style.scss'
 
 function IngredientList() {
 
-  const [ingredients, setIngredients] = useState([])
   const [searchIngredients, setSearchIngredients] = useState('')
-
-  useEffect(() => {
-    fetchIngredients()
-  }, [])
-
-  const fetchIngredients = async () => {
-    try {
-      const response = await fetch(INGREDIENTS)
-      const json = await response.json()
-      setIngredients(json)
-    } catch (error) {
-      console.error('Error al obtener los ingredientes:', error)
-    }
-  }
+  const { ingredients, fetchIngredients } = useIngredients()
 
   const handleCheckboxChange = async (ingredientId, isChecked) => {
     try {

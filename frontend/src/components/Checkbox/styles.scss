@@ -1,0 +1,13 @@
+.checkbox{
+  white-space: nowrap;
+  padding: 0.5em;
+
+    label {
+      color: var(--black-color);
+      padding: 0.7em;
+  }
+
+  input{
+    background-color: var(--black-color);
+  }
+}

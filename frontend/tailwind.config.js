@@ -12,7 +12,7 @@ module.exports = {
       colors: {
         // light mode
         'base-color': '#FFFF',
-        'back-color': '#EDE8E0',
+        'back-color': '#fcf7f3',
         'brand-color': '#D7FF82',
         'black-color': '#262626',
         tremor: {
