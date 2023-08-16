@@ -14,10 +14,10 @@ export class Link extends BaseModel {
   static jsonSchema = {
     type: 'object',
     additionalProperties: false,
-    required: ['value', 'recipe_id'],
+    required: ['value'],
     properties: {
       id: { type: 'integer' },
-      recipe_id: { type: 'integer' },
+      recipe_id: { type: ['integer', 'null'] },
       // type: { type: 'string' }, // 'youtube', 'web', ...
       value: { type: 'string' },
     },

@@ -1,6 +1,6 @@
 import express from 'express'
 import { errorHandler } from '../utils'
-import { Recipe, Ingredient } from '../models/db'
+import { Recipe, Ingredient, Link } from '../models/db'
 import { NotFoundError } from '../errors'
 
 const router = express()
@@ -81,12 +81,27 @@ router.put('/recipes/:id(\\d+)', errorHandler(async (req, res) => {
     body.ingredients = await Promise.all(body.ingredients.map(async (ingredientName: string) =>
       await Ingredient
         .query()
+        .select('id')
         .where({name: ingredientName.toLowerCase()})
         .first()
         ||
         {name: ingredientName.toLowerCase()}
     ))
   }
+
+  if (body.links?.length) {
+    // Search for existing Links. If exist, pass the id to Objection to tell that should be related
+    body.links = await Promise.all(body.links.map(async (linkValue: string) =>
+      await Link
+        .query()
+        .select('id')
+        .where({value: linkValue})
+        .first()
+        ||
+        {value: linkValue}
+    ))
+  }
+
 
   const trx = await Recipe.startTransaction()
 
