@@ -1,11 +1,51 @@
-import React from 'react'
-import {LinksForm} from './RecipeForm'
-import {IngredientsForm} from './RecipeForm'
+import React, { useState } from 'react'
+import { LinksForm } from './RecipeForm'
+import { IngredientsForm } from './RecipeForm'
+import { RECIPES } from 'src/api'
+import { useRecipes } from 'src/hooks/api'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBowlRice, faXmark } from '@fortawesome/free-solid-svg-icons'
 import './styles.scss'
 
-export function CreateNewRecipe({ onClickCancel }) {
+export function CreateNewRecipe({ onClickCreated, onClickCancel }) {
+
+  const { recipes, fetchRecipes } = useRecipes()
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    ingredients: [],
+    links: [],
+  })
+
+  const handleChange = (e) => {
+    setFormData({
+      // mantenemos los valores previos de los valores del formulario
+      ...formData,
+      // actualizamos el mame de acuerdo al que llega del input
+      [e.target.name]: e.target.value
+    })
+  }
+
+
+  const handleCreateRecipe = async () => {
+    try {
+      await fetch(`${RECIPES}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          formData
+        ),
+      })
+      fetchRecipes()
+    } catch (error) {
+      console.error('Error al crear la receta:', error)
+    }
+  }
+
+
+
 
   return (<>
     <div className='create-new-recipe'>
@@ -18,25 +58,55 @@ export function CreateNewRecipe({ onClickCancel }) {
                 size='xl'
               />
             </div>
+            <pre><code>
+              {JSON.stringify(formData, null, 2)}
+            </code></pre>
             <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Crea tu receta</h1>
             {/* Nombre */}
             <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Nombre</label>
             <section className="relative mb-5 mt-2">
-              <input type="text" id="first_name" className="bg-gray-50 border  text-gray-900 text-sm rounded-lg block w-full p-2.5 border border-gray-300 dark:placeholder-gray-400 dark:text-white" placeholder="Nombre de la receta" autoComplete='false' required />
+              <input
+                name='name'
+                type="text"
+                id="first_name"
+                className="bg-gray-50 border  text-gray-900 text-sm rounded-lg block w-full p-2.5 border border-gray-300 dark:placeholder-gray-400 dark:text-white"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Nombre de la receta"
+                autoComplete='false'
+                required
+              />
             </section>
             {/* Descripción */}
             <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Descripción</label>
             <section className="relative mb-5 mt-2">
-              <textarea id="message" rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 dark:placeholder-gray-400" placeholder="Describe los pasos a seguir..."></textarea>
+              <textarea
+                id="message"
+                name='description'
+                rows={4}
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 dark:placeholder-gray-400"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Describe los pasos a seguir...">
+              </textarea>
             </section>
 
-            < LinksForm />
+            <LinksForm
+              name='links'
+              onChange={handleChange}
+            />
 
-            <IngredientsForm />
+            <IngredientsForm
+              name='ingredients'
+              onChange={handleChange} />
 
             {/* Buttons */}
             <div className="flex items-center justify-start w-full">
-              <button type="button" className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+              <button
+                type="button"
+                className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                onClick={handleCreateRecipe}
+              >
                 Crear
               </button>
               <button

@@ -14,7 +14,7 @@ function RecipeListWithAnimation({ match }) {
   let { id } = match.params
   const imageHasLoaded = true
 
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(true)
 
   return (
     <>

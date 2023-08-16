@@ -1,0 +1,29 @@
+.video-player-container{
+  height: 150px;
+  scroll
+  .react-player{
+    margin-right: 20px;
+  }
+}
+
+// hide scrollbar
+.react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.react-horizontal-scrolling-menu--scroll-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.arrow-button-container{
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+
+  .ingredient-list-form {
+    padding-bottom: 20px;
+    .icon-x{
+      padding-left: 0.7em;
+    }
+  }

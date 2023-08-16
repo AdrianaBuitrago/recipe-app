@@ -19,7 +19,8 @@ export const useRecipes = () => {
   }
 
   return {
-    recipes
+    recipes,
+    fetchRecipes
   }
 }
 
