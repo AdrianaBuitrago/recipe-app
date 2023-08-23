@@ -8,7 +8,7 @@ function RecipePreview({ id, name }) {
 
   return (
     <li className="card">
-      <div className="card-content-container">
+      <div className="recipe-preview card-content-container">
         <motion.div className="card-content" layoutId={`card-container-${id}`}>
           <motion.div
             className="card-image-container"

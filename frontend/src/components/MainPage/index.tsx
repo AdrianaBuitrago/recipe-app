@@ -9,10 +9,12 @@ import { AddRecipeButton } from 'components/AddRecipeButton'
 import { Footer } from './Footer'
 import IngredientList from '../IngredientList'
 import './styles.scss'
+import { useRecipes } from 'src/hooks/api'
 
 function RecipeListWithAnimation({ match }) {
   let { id } = match.params
   const imageHasLoaded = true
+  const { recipes } = useRecipes()
 
   const [toggle, setToggle] = useState(false)
 
@@ -20,7 +22,7 @@ function RecipeListWithAnimation({ match }) {
     <>
       <RecipeList selectedId={id} />
       <AnimatePresence>
-        {id && imageHasLoaded && <ExpandedRecipe selectedId={id} />}
+        {id && imageHasLoaded && <ExpandedRecipe recipes={recipes} selectedId={id} />}
       </AnimatePresence>
       <AddRecipeButton
         onClickAddRecipeButton={() => setToggle(true)}

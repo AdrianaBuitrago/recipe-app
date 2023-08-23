@@ -3,10 +3,8 @@ import { motion } from 'framer-motion'
 import { Metric } from '@tremor/react'
 
 import { Link } from 'react-router-dom'
-import { useRecipes } from 'src/hooks/api'
 
-export function ExpandedRecipe({ selectedId }) {
-  const { recipes } = useRecipes()
+export function ExpandedRecipe({ recipes, selectedId }) {
 
   const recipe = recipes.find(recipe => {
     return recipe.id === Number(selectedId)
@@ -30,7 +28,7 @@ export function ExpandedRecipe({ selectedId }) {
       >
         <Link to="/recipes" />
       </motion.div>
-      <div className="card-content-container open">
+      <div className="expanded-recipe card-content-container open">
         <motion.div className="card-content" layoutId={`card-container-${id}`}>
           <motion.div
             className="card-image-container"
