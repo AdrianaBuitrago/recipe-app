@@ -7,7 +7,7 @@ import { useRecipes } from 'src/hooks/api'
 function RecipePreview({ id, name }) {
 
   return (
-    <li className={`card ${name}`}>
+    <li className="card">
       <div className="card-content-container">
         <motion.div className="card-content" layoutId={`card-container-${id}`}>
           <motion.div

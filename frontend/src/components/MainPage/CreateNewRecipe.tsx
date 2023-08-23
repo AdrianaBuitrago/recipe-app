@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBowlRice, faXmark } from '@fortawesome/free-solid-svg-icons'
 import './styles.scss'
 
-export function CreateNewRecipe({ onClickCreated, onClickCancel }) {
+export function CreateNewRecipe({ onClickCancel }) {
 
   const { recipes, fetchRecipes } = useRecipes()
   const [formData, setFormData] = useState({
@@ -58,9 +58,6 @@ export function CreateNewRecipe({ onClickCreated, onClickCancel }) {
                 size='xl'
               />
             </div>
-            <pre><code>
-              {JSON.stringify(formData, null, 2)}
-            </code></pre>
             <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Crea tu receta</h1>
             {/* Nombre */}
             <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Nombre</label>

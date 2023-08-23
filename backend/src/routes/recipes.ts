@@ -43,6 +43,19 @@ router.post('/recipes', errorHandler(async (req, res) => {
     ))
   }
 
+  if (body.links?.length) {
+    // Search for existing Links. If exist, pass the id to Objection to tell that should be related
+    body.links = await Promise.all(body.links.map(async (linkValue: string) =>
+      await Link
+        .query()
+        .select('id')
+        .where({value: linkValue})
+        .first()
+        ||
+        {value: linkValue}
+    ))
+  }
+
   const trx = await Recipe.startTransaction()
 
   const options = {

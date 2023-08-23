@@ -14,7 +14,7 @@ function RecipeListWithAnimation({ match }) {
   let { id } = match.params
   const imageHasLoaded = true
 
-  const [toggle, setToggle] = useState(true)
+  const [toggle, setToggle] = useState(false)
 
   return (
     <>
@@ -29,6 +29,7 @@ function RecipeListWithAnimation({ match }) {
     </>
   )
 }
+
 
 export default function MainPage() {
   return (
