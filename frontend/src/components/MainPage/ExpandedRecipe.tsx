@@ -44,7 +44,6 @@ export function ExpandedRecipe({ recipes, selectedId }) {
             className="title-container"
             layoutId={`title-container-${id}`}
           >
-            {/* <span className="category">{description}</span> */}
             <Metric>{name}</Metric>
           </motion.div>
           <motion.div className="content-container" animate>
