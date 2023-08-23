@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useRef} from 'react'
+import { useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Metric } from '@tremor/react'
 
 import { Link } from 'react-router-dom'
+import { useOnClickOutside } from 'src/hooks'
 
 export function ExpandedRecipe({ recipes, selectedId }) {
+  const history = useHistory()
+  const ref = useRef()
+  useOnClickOutside(ref, () => {history.push('/recipes')})
 
   const recipe = recipes.find(recipe => {
     return recipe.id === Number(selectedId)
@@ -23,13 +28,17 @@ export function ExpandedRecipe({ recipes, selectedId }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0, transition: { duration: 0.15 } }}
         transition={{ duration: 0.2, delay: 0.15 }}
-        style={{ pointerEvents: 'auto' }}
+        // style={{ pointerEvents: 'auto' }}
         className="overlay"
       >
         <Link to="/recipes" />
       </motion.div>
       <div className="expanded-recipe card-content-container open">
-        <motion.div className="card-content" layoutId={`card-container-${id}`}>
+        <motion.div
+          ref={ref}
+          className="card-content"
+          layoutId={`card-container-${id}`}
+        >
           <motion.div
             className="card-image-container"
             layoutId={`card-image-container-${id}`}
