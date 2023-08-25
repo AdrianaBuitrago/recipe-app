@@ -6,10 +6,13 @@ import { TextInput } from '@tremor/react'
 import Checkbox from 'components/Checkbox'
 import './style.scss'
 
-function IngredientList() {
 
+export function IngredientList({
+  ingredients,
+  onChange,
+  showSearch = true,
+}) {
   const [searchIngredients, setSearchIngredients] = useState('')
-  const { ingredients, fetchIngredients } = useIngredients()
 
   const handleCheckboxChange = async (ingredientId, isChecked) => {
     try {
@@ -22,7 +25,7 @@ function IngredientList() {
           'is_checked': isChecked
         }),
       })
-      fetchIngredients()
+      onChange()
     } catch (error) {
       console.error('Error al actualizar el ingrediente:', error)
     }
@@ -74,12 +77,16 @@ function IngredientList() {
           </section>
         </div>
         <div className='search-container'>
-          <TextInput
-            className='search-input'
-            value={searchIngredients}
-            placeholder="Buscar..."
-            onChange={handleSearchInputChange}
-          />
+          {
+            showSearch ?
+              <TextInput
+                className='search-input'
+                value={searchIngredients}
+                placeholder="Buscar..."
+                onChange={handleSearchInputChange}
+              />
+              : null
+          }
         </div>
         <section className='ingredients-crossed-out'>
           <h1>Resto de ingredientes</h1>
@@ -100,4 +107,15 @@ function IngredientList() {
   )
 }
 
-export default IngredientList
+const AllIngredientList = () => {
+  const { ingredients, fetchIngredients } = useIngredients()
+
+  return (
+    <IngredientList
+      ingredients={ingredients}
+      onChange={() => fetchIngredients()}
+    />
+  )
+}
+
+export default AllIngredientList
